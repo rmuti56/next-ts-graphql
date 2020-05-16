@@ -1,6 +1,6 @@
-import gql from "graphql-tag";
-import * as ApolloReactCommon from "@apollo/react-common";
-import * as ApolloReactHooks from "@apollo/react-hooks";
+import gql from 'graphql-tag';
+import * as ApolloReactCommon from '@apollo/react-common';
+import * as ApolloReactHooks from '@apollo/react-hooks';
 export type Maybe<T> = T | null;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -14,121 +14,155 @@ export type Scalars = {
 };
 
 export type Query = {
-  __typename?: "Query";
-  hello?: Maybe<Scalars["String"]>;
+   __typename?: 'Query';
+  hello?: Maybe<Scalars['String']>;
   tasks: Array<Task>;
   task?: Maybe<Task>;
 };
+
 
 export type QueryTasksArgs = {
   status?: Maybe<TaskStatus>;
 };
 
+
 export type QueryTaskArgs = {
-  id: Scalars["Int"];
+  id: Scalars['Int'];
 };
 
 export enum TaskStatus {
-  Active = "active",
-  Completed = "completed",
+  Active = 'active',
+  Completed = 'completed'
 }
 
 export type Task = {
-  __typename?: "Task";
-  id: Scalars["Int"];
-  title: Scalars["String"];
+   __typename?: 'Task';
+  id: Scalars['Int'];
+  title: Scalars['String'];
   status: TaskStatus;
 };
 
 export type Mutation = {
-  __typename?: "Mutation";
+   __typename?: 'Mutation';
   createTask?: Maybe<Task>;
   updateTask?: Maybe<Task>;
   changeStatus?: Maybe<Task>;
   deleteTask?: Maybe<Task>;
 };
 
+
 export type MutationCreateTaskArgs = {
   input: CreateTaskInput;
 };
+
 
 export type MutationUpdateTaskArgs = {
   input: UpdateTaskInput;
 };
 
+
 export type MutationChangeStatusArgs = {
-  id: Scalars["Int"];
+  id: Scalars['Int'];
   status: TaskStatus;
 };
 
+
 export type MutationDeleteTaskArgs = {
-  id: Scalars["Int"];
+  id: Scalars['Int'];
 };
 
 export type CreateTaskInput = {
-  title: Scalars["String"];
+  title: Scalars['String'];
 };
 
 export type UpdateTaskInput = {
-  id: Scalars["Int"];
-  title?: Maybe<Scalars["String"]>;
+  id: Scalars['Int'];
+  title?: Maybe<Scalars['String']>;
   status?: Maybe<TaskStatus>;
 };
 
 export enum CacheControlScope {
-  Public = "PUBLIC",
-  Private = "PRIVATE",
+  Public = 'PUBLIC',
+  Private = 'PRIVATE'
 }
+
 
 export type CreateTaskMutationVariables = {
   input: CreateTaskInput;
 };
 
-export type CreateTaskMutation = { __typename?: "Mutation" } & {
-  createTask?: Maybe<
-    { __typename?: "Task" } & Pick<Task, "id" | "title" | "status">
-  >;
+
+export type CreateTaskMutation = (
+  { __typename?: 'Mutation' }
+  & { createTask?: Maybe<(
+    { __typename?: 'Task' }
+    & Pick<Task, 'id' | 'title' | 'status'>
+  )> }
+);
+
+export type DeleteTaskMutationVariables = {
+  id: Scalars['Int'];
 };
+
+
+export type DeleteTaskMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteTask?: Maybe<(
+    { __typename?: 'Task' }
+    & Pick<Task, 'id' | 'title' | 'status'>
+  )> }
+);
 
 export type TaskQueryVariables = {
-  id: Scalars["Int"];
+  id: Scalars['Int'];
 };
 
-export type TaskQuery = { __typename?: "Query" } & {
-  task?: Maybe<{ __typename?: "Task" } & Pick<Task, "id" | "title" | "status">>;
-};
+
+export type TaskQuery = (
+  { __typename?: 'Query' }
+  & { task?: Maybe<(
+    { __typename?: 'Task' }
+    & Pick<Task, 'id' | 'title' | 'status'>
+  )> }
+);
 
 export type TasksQueryVariables = {
   status?: Maybe<TaskStatus>;
 };
 
-export type TasksQuery = { __typename?: "Query" } & {
-  tasks: Array<{ __typename?: "Task" } & Pick<Task, "id" | "title" | "status">>;
-};
+
+export type TasksQuery = (
+  { __typename?: 'Query' }
+  & { tasks: Array<(
+    { __typename?: 'Task' }
+    & Pick<Task, 'id' | 'title' | 'status'>
+  )> }
+);
 
 export type UpdateTaskMutationVariables = {
   input: UpdateTaskInput;
 };
 
-export type UpdateTaskMutation = { __typename?: "Mutation" } & {
-  updateTask?: Maybe<
-    { __typename?: "Task" } & Pick<Task, "id" | "title" | "status">
-  >;
-};
+
+export type UpdateTaskMutation = (
+  { __typename?: 'Mutation' }
+  & { updateTask?: Maybe<(
+    { __typename?: 'Task' }
+    & Pick<Task, 'id' | 'title' | 'status'>
+  )> }
+);
+
 
 export const CreateTaskDocument = gql`
-  mutation CreateTask($input: CreateTaskInput!) {
-    createTask(input: $input) {
-      id
-      title
-      status
-    }
+    mutation CreateTask($input: CreateTaskInput!) {
+  createTask(input: $input) {
+    id
+    title
+    status
   }
-`;
-export type CreateTaskMutationFn = ApolloReactCommon.MutationFunction<
-  CreateTaskMutation,
-  CreateTaskMutationVariables
->;
+}
+    `;
+export type CreateTaskMutationFn = ApolloReactCommon.MutationFunction<CreateTaskMutation, CreateTaskMutationVariables>;
 
 /**
  * __useCreateTaskMutation__
@@ -147,36 +181,55 @@ export type CreateTaskMutationFn = ApolloReactCommon.MutationFunction<
  *   },
  * });
  */
-export function useCreateTaskMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
-    CreateTaskMutation,
-    CreateTaskMutationVariables
-  >
-) {
-  return ApolloReactHooks.useMutation<
-    CreateTaskMutation,
-    CreateTaskMutationVariables
-  >(CreateTaskDocument, baseOptions);
-}
-export type CreateTaskMutationHookResult = ReturnType<
-  typeof useCreateTaskMutation
->;
-export type CreateTaskMutationResult = ApolloReactCommon.MutationResult<
-  CreateTaskMutation
->;
-export type CreateTaskMutationOptions = ApolloReactCommon.BaseMutationOptions<
-  CreateTaskMutation,
-  CreateTaskMutationVariables
->;
-export const TaskDocument = gql`
-  query Task($id: Int!) {
-    task(id: $id) {
-      id
-      title
-      status
-    }
+export function useCreateTaskMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateTaskMutation, CreateTaskMutationVariables>) {
+        return ApolloReactHooks.useMutation<CreateTaskMutation, CreateTaskMutationVariables>(CreateTaskDocument, baseOptions);
+      }
+export type CreateTaskMutationHookResult = ReturnType<typeof useCreateTaskMutation>;
+export type CreateTaskMutationResult = ApolloReactCommon.MutationResult<CreateTaskMutation>;
+export type CreateTaskMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateTaskMutation, CreateTaskMutationVariables>;
+export const DeleteTaskDocument = gql`
+    mutation DeleteTask($id: Int!) {
+  deleteTask(id: $id) {
+    id
+    title
+    status
   }
-`;
+}
+    `;
+export type DeleteTaskMutationFn = ApolloReactCommon.MutationFunction<DeleteTaskMutation, DeleteTaskMutationVariables>;
+
+/**
+ * __useDeleteTaskMutation__
+ *
+ * To run a mutation, you first call `useDeleteTaskMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteTaskMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteTaskMutation, { data, loading, error }] = useDeleteTaskMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteTaskMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<DeleteTaskMutation, DeleteTaskMutationVariables>) {
+        return ApolloReactHooks.useMutation<DeleteTaskMutation, DeleteTaskMutationVariables>(DeleteTaskDocument, baseOptions);
+      }
+export type DeleteTaskMutationHookResult = ReturnType<typeof useDeleteTaskMutation>;
+export type DeleteTaskMutationResult = ApolloReactCommon.MutationResult<DeleteTaskMutation>;
+export type DeleteTaskMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteTaskMutation, DeleteTaskMutationVariables>;
+export const TaskDocument = gql`
+    query Task($id: Int!) {
+  task(id: $id) {
+    id
+    title
+    status
+  }
+}
+    `;
 
 /**
  * __useTaskQuery__
@@ -194,40 +247,24 @@ export const TaskDocument = gql`
  *   },
  * });
  */
-export function useTaskQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<TaskQuery, TaskQueryVariables>
-) {
-  return ApolloReactHooks.useQuery<TaskQuery, TaskQueryVariables>(
-    TaskDocument,
-    baseOptions
-  );
-}
-export function useTaskLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    TaskQuery,
-    TaskQueryVariables
-  >
-) {
-  return ApolloReactHooks.useLazyQuery<TaskQuery, TaskQueryVariables>(
-    TaskDocument,
-    baseOptions
-  );
-}
+export function useTaskQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<TaskQuery, TaskQueryVariables>) {
+        return ApolloReactHooks.useQuery<TaskQuery, TaskQueryVariables>(TaskDocument, baseOptions);
+      }
+export function useTaskLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<TaskQuery, TaskQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<TaskQuery, TaskQueryVariables>(TaskDocument, baseOptions);
+        }
 export type TaskQueryHookResult = ReturnType<typeof useTaskQuery>;
 export type TaskLazyQueryHookResult = ReturnType<typeof useTaskLazyQuery>;
-export type TaskQueryResult = ApolloReactCommon.QueryResult<
-  TaskQuery,
-  TaskQueryVariables
->;
+export type TaskQueryResult = ApolloReactCommon.QueryResult<TaskQuery, TaskQueryVariables>;
 export const TasksDocument = gql`
-  query Tasks($status: TaskStatus) {
-    tasks(status: $status) {
-      id
-      title
-      status
-    }
+    query Tasks($status: TaskStatus) {
+  tasks(status: $status) {
+    id
+    title
+    status
   }
-`;
+}
+    `;
 
 /**
  * __useTasksQuery__
@@ -245,47 +282,25 @@ export const TasksDocument = gql`
  *   },
  * });
  */
-export function useTasksQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
-    TasksQuery,
-    TasksQueryVariables
-  >
-) {
-  return ApolloReactHooks.useQuery<TasksQuery, TasksQueryVariables>(
-    TasksDocument,
-    baseOptions
-  );
-}
-export function useTasksLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    TasksQuery,
-    TasksQueryVariables
-  >
-) {
-  return ApolloReactHooks.useLazyQuery<TasksQuery, TasksQueryVariables>(
-    TasksDocument,
-    baseOptions
-  );
-}
+export function useTasksQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<TasksQuery, TasksQueryVariables>) {
+        return ApolloReactHooks.useQuery<TasksQuery, TasksQueryVariables>(TasksDocument, baseOptions);
+      }
+export function useTasksLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<TasksQuery, TasksQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<TasksQuery, TasksQueryVariables>(TasksDocument, baseOptions);
+        }
 export type TasksQueryHookResult = ReturnType<typeof useTasksQuery>;
 export type TasksLazyQueryHookResult = ReturnType<typeof useTasksLazyQuery>;
-export type TasksQueryResult = ApolloReactCommon.QueryResult<
-  TasksQuery,
-  TasksQueryVariables
->;
+export type TasksQueryResult = ApolloReactCommon.QueryResult<TasksQuery, TasksQueryVariables>;
 export const UpdateTaskDocument = gql`
-  mutation UpdateTask($input: UpdateTaskInput!) {
-    updateTask(input: $input) {
-      id
-      title
-      status
-    }
+    mutation UpdateTask($input: UpdateTaskInput!) {
+  updateTask(input: $input) {
+    id
+    title
+    status
   }
-`;
-export type UpdateTaskMutationFn = ApolloReactCommon.MutationFunction<
-  UpdateTaskMutation,
-  UpdateTaskMutationVariables
->;
+}
+    `;
+export type UpdateTaskMutationFn = ApolloReactCommon.MutationFunction<UpdateTaskMutation, UpdateTaskMutationVariables>;
 
 /**
  * __useUpdateTaskMutation__
@@ -304,24 +319,9 @@ export type UpdateTaskMutationFn = ApolloReactCommon.MutationFunction<
  *   },
  * });
  */
-export function useUpdateTaskMutation(
-  baseOptions?: ApolloReactHooks.MutationHookOptions<
-    UpdateTaskMutation,
-    UpdateTaskMutationVariables
-  >
-) {
-  return ApolloReactHooks.useMutation<
-    UpdateTaskMutation,
-    UpdateTaskMutationVariables
-  >(UpdateTaskDocument, baseOptions);
-}
-export type UpdateTaskMutationHookResult = ReturnType<
-  typeof useUpdateTaskMutation
->;
-export type UpdateTaskMutationResult = ApolloReactCommon.MutationResult<
-  UpdateTaskMutation
->;
-export type UpdateTaskMutationOptions = ApolloReactCommon.BaseMutationOptions<
-  UpdateTaskMutation,
-  UpdateTaskMutationVariables
->;
+export function useUpdateTaskMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateTaskMutation, UpdateTaskMutationVariables>) {
+        return ApolloReactHooks.useMutation<UpdateTaskMutation, UpdateTaskMutationVariables>(UpdateTaskDocument, baseOptions);
+      }
+export type UpdateTaskMutationHookResult = ReturnType<typeof useUpdateTaskMutation>;
+export type UpdateTaskMutationResult = ApolloReactCommon.MutationResult<UpdateTaskMutation>;
+export type UpdateTaskMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateTaskMutation, UpdateTaskMutationVariables>;
