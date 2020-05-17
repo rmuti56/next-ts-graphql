@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import { TaskStatus } from "../generated/graphql";
+import { TaskFilterContext } from "../pages/[status]";
 
-interface Props {
-  status?: TaskStatus;
-}
+interface Props {}
 
-const TaskFilter: React.FC<Props> = ({ status }) => {
+const TaskFilter: React.FC<Props> = ({}) => {
+  const { status } = useContext(TaskFilterContext);
   return (
     <ul className="task-filter">
       <li>

@@ -43,7 +43,7 @@ const IndexPage: NextPage<Props, InitialProps> = ({ ssr }) => {
     <TaskFilterContext.Provider value={taskFilter}>
       <CreateTaskForm onTaskCreated={refetch} />
       {tasks ? <TaskList tasks={tasks} /> : <p>There are no tasks here</p>}
-      <TaskFilter status={status} />
+      <TaskFilter />
     </TaskFilterContext.Provider>
   );
 };

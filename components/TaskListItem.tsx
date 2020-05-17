@@ -54,7 +54,7 @@ const TaskListItem: React.FC<Props> = ({ task }) => {
     }
   }, [error, changeStatusError]);
 
-  const handleChangeStatus = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeStatus = (_: React.ChangeEvent<HTMLInputElement>) => {
     const newStatus =
       task.status === TaskStatus.Active
         ? TaskStatus.Completed
