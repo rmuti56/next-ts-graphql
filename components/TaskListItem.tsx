@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import Link from "next/link";
 import {
   Task,
@@ -9,21 +9,23 @@ import {
   TasksDocument,
   useChangeStatusMutation,
 } from "../generated/graphql";
+import { TaskFilterContext } from "../pages/[status]";
 
 interface Props {
   task: Task;
 }
 const TaskListItem: React.FC<Props> = ({ task }) => {
+  const { status } = useContext(TaskFilterContext);
   const [deleteTask, { loading, error }] = useDeleteTaskMutation({
     update: (cache, result) => {
       const data = cache.readQuery<TasksQuery, TasksQueryVariables>({
         query: TasksDocument,
-        variables: { status: undefined },
+        variables: { status },
       });
       if (data) {
         cache.writeQuery<TasksQuery, TasksQueryVariables>({
           query: TasksDocument,
-          variables: { status: undefined },
+          variables: { status },
           data: {
             tasks: data.tasks.filter(
               ({ id }) => id !== result.data?.deleteTask?.id
